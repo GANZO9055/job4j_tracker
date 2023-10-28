@@ -5,8 +5,6 @@ public class Broken {
     public String surname;
     String name;
 
-    private int sizeOfEmpty = 10;
-
     Broken() { }
 
     void echo() { }
@@ -18,4 +16,6 @@ public class Broken {
             System.out.println(obj);
         }
     }
+
+    private int sizeOfEmpty = 10;
 }
