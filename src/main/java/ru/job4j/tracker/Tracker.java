@@ -48,7 +48,8 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            items[index].setName(item.getName());
+            items[index] = item;
+            items[index].setId(id);
         }
         return rsl;
     }
@@ -66,7 +67,8 @@ public class Tracker {
     private int indexOf(int id) {
         int rsl = -1;
         for (int index = 0; index < size; index++) {
-            if (items[index].getId() == id) {
+            int count = items[index].getId();
+            if (count == id) {
                 rsl = index;
                 break;
             }
