@@ -50,7 +50,7 @@ public class Tracker {
         if (rsl) {
             items[index].setName(item.getName());
         }
-        return index != -1;
+        return rsl;
     }
 
     public void delete(int id) {
