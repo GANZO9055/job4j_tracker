@@ -17,34 +17,6 @@ public class StartUI {
         }
     }
 
-    public static void deleteItem(Input input, Tracker tracker) {
-        System.out.println("=== Удаление заявки ===");
-        int id = input.askInt("Введите id: ");
-        Item item = tracker.findById(id);
-        tracker.delete(id);
-        System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
-    }
-
-    public static void replaceItem(Input input, Tracker tracker) {
-        System.out.println("=== Edit item ===");
-        int id = input.askInt("Введите id: ");
-        String name = input.askStr("Введите name: ");
-        Item item = new Item(name);
-        if (tracker.replace(id, item)) {
-            System.out.println("Заявка изменена успешно.");
-        } else {
-            System.out.println("Ошибка замены заявки.");
-        }
-    }
-
-    public static void createItem(Input input, Tracker tracker) {
-        System.out.println("=== Создание новой заявки ===");
-        String name = input.askStr("Введите name: ");
-        Item item = new Item(name);
-        tracker.add(item);
-        System.out.println("Добавленная заявка: " + item);
-    }
-
     private void showMenu(UserAction[] actions) {
         out.println("Меню:");
         for (int index = 0; index < actions.length; index++) {

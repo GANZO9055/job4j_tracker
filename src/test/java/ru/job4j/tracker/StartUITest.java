@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StartUITest {
-    /*
+
     @Test
     void whenExit() {
         Output out = new StubOutput();
@@ -59,7 +59,7 @@ class StartUITest {
     void whenDeleteItem() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("Deleted item"));
+        Item item = tracker.add(new Item("Deleted item")); /* Добавляется в tracker новая заявка */
         Input in = new MockInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
         );
@@ -151,43 +151,5 @@ class StartUITest {
                         + "=== Завершение программы ===" + ln
         );
     }
-    */
 
-    @Test
-    void whenAddItem() {
-        String[] answer = {"Fix PC"};
-        Input input = new MockInput(answer);
-        Tracker tracker = new Tracker();
-        StartUI.createItem(input, tracker);
-        Item created = tracker.findAll()[0];
-        Item expected = new Item("Fix PC");
-        assertThat(created.getName()).isEqualTo(expected.getName());
-    }
-
-    @Test
-    void whenReplaceItem() {
-        Tracker tracker = new Tracker();
-        Item item = new Item("new item");
-        tracker.add(item);
-        String[] answers = {
-                String.valueOf(item.getId()),
-                "edited item"
-        };
-        StartUI.replaceItem(new MockInput(answers), tracker);
-        Item edited = tracker.findById(item.getId());
-        assertThat(edited.getName()).isEqualTo("edited item");
-    }
-
-    @Test
-    void whenDeleteItem() {
-        Tracker tracker = new Tracker();
-        Item item = new Item("new item");
-        tracker.add(item);
-        String[] answers = {
-                String.valueOf(item.getId())
-        };
-        StartUI.deleteItem(new MockInput(answers), tracker);
-        Item edited = tracker.findById(item.getId());
-        assertThat(edited).isNull();
-    }
 }
