@@ -152,7 +152,6 @@ class StartUITest {
         );
     }
     */
-
     @Test
     void whenAddItem() {
         String[] answer = {"Fix PC"};
