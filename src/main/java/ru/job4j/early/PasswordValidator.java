@@ -1,5 +1,7 @@
 package ru.job4j.early;
 
+import ru.job4j.ex.Fact;
+
 public class PasswordValidator {
     private static final String[] FORBIDDEN = {"qwerty", "12345", "password", "admin", "user"};
 
@@ -14,8 +16,8 @@ public class PasswordValidator {
                     "Password should be length [8, 32]"
             );
         }
-        for (int i = 0; i < FORBIDDEN.length; i++) {
-            if (password.toLowerCase().contains(FORBIDDEN[i])) {
+        for (String register : FORBIDDEN) {
+            if (password.toLowerCase().contains(register)) {
                 throw new IllegalArgumentException(
                         "Password shouldn't contain substrings: qwerty, 12345, password, admin, user"
                 );
@@ -37,6 +39,9 @@ public class PasswordValidator {
             }
             if (!Character.isLetterOrDigit(symbol)) {
                 hasSpecial = true;
+            }
+            if (hasUpCase && hasLowCase && hasDigit && hasSpecial) {
+                break;
             }
         }
         if (!hasUpCase) {
