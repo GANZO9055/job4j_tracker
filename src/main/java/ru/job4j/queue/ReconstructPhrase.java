@@ -16,10 +16,13 @@ public class ReconstructPhrase {
 
     private String getEvenElements() {
         StringBuilder elements = new StringBuilder();
-        LinkedList<Character> one = (LinkedList<Character>) evenElements;
-        for (int i = 0; i < evenElements.size(); i++) {
+        int number = evenElements.size();
+        for (int i = 0; i < number; i++) {
             if (i % 2 == 0) {
-                elements.append(one.get(i));
+                elements.append(evenElements.pollFirst());
+            }
+            if (i % 2 != 0) {
+                evenElements.poll();
             }
         }
         return elements.toString();
@@ -27,9 +30,9 @@ public class ReconstructPhrase {
 
     private String getDescendingElements() {
         StringBuilder elements = new StringBuilder();
-        LinkedList<Character> one = (LinkedList<Character>) descendingElements;
-        for (int i = 0; i < descendingElements.size(); i++) {
-            elements.append(one.get(descendingElements.size() - i - 1));
+        int number = descendingElements.size();
+        for (int i = 0; i < number; i++) {
+            elements.append(descendingElements.pollLast());
         }
         return elements.toString();
     }
