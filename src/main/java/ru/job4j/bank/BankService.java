@@ -28,11 +28,10 @@ public class BankService {
         if (user != null) {
             if (users.get(user).isEmpty()) {
                 users.get(user).add(account);
-            } else {
-                for (Account one : users.get(user)) {
-                    if (!account.equals(one)) {
-                        users.get(user).add(account);
-                    }
+            }
+            for (Account one : users.get(user)) {
+                if (!account.getRequisite().equals(one.getRequisite())) {
+                    users.get(user).add(account);
                 }
             }
         }
