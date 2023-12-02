@@ -20,8 +20,7 @@ public class ReconstructPhrase {
         for (int i = 0; i < number; i++) {
             if (i % 2 == 0) {
                 elements.append(evenElements.pollFirst());
-            }
-            if (i % 2 != 0) {
+            } else {
                 evenElements.poll();
             }
         }
