@@ -21,6 +21,7 @@ public class ReconstructPhrase {
             if (i % 2 == 0) {
                 elements.append(evenElements.pollFirst());
             } else {
+
                 evenElements.poll();
             }
         }
