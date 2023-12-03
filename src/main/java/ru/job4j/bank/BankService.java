@@ -22,7 +22,7 @@ public class BankService {
         if (user != null) {
             List<Account> one = users.get(user);
             if (!one.contains(account)) {
-                users.get(user).add(account);
+                one.add(account);
             }
         }
     }
@@ -52,21 +52,14 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
-        User user = findByPassport(srcPassport);
-        User userOne = findByPassport(destPassport);
-        List<Account> one = users.get(user);
-        List<Account> oneUser = users.get(userOne);
-        for (Account account : one) {
-            for (Account accountOne : oneUser) {
-                if (account.getRequisite().equals(srcRequisite) && accountOne.getRequisite().equals(destRequisite)) {
-                    if (account.getBalance() >= amount) {
-                        account.setBalance(account.getBalance() - amount);
-                        accountOne.setBalance(accountOne.getBalance() + amount);
-                        rsl = true;
-                    }
-                }
+        Account user = findByRequisite(srcPassport, srcRequisite);
+        Account userOne = findByRequisite(destPassport, destRequisite);
+        if (user != null && userOne != null) {
+            if (user.getBalance() >= amount) {
+                user.setBalance(user.getBalance() - amount);
+                userOne.setBalance(userOne.getBalance() + amount);
+                rsl = true;
             }
-
         }
         return rsl;
     }
