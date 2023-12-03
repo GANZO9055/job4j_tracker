@@ -42,7 +42,6 @@ public class AnalyzeByMap {
                 if (!one.containsKey(subject.name())) {
                     one.put(subject.name(), subject.score());
                 }
-
             }
         }
         for (String key : one.keySet()) {
@@ -52,10 +51,40 @@ public class AnalyzeByMap {
     }
 
     public static Label bestStudent(List<Pupil> pupils) {
-        return null;
+        Map<String, Integer> one = new LinkedHashMap<>();
+        List<Label> labels = new ArrayList<>();
+        int number = 0;
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                number += subject.score();
+            }
+            one.put(pupil.name(), number);
+            number = 0;
+        }
+        for (String key : one.keySet()) {
+            labels.add(new Label(key, (double) one.get(key)));
+        }
+        labels.sort(Comparator.naturalOrder());
+        return labels.get(labels.size() - 1);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        return null;
+        Map<String, Integer> one = new LinkedHashMap<>();
+        List<Label> labels = new ArrayList<>();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                if (one.containsKey(subject.name())) {
+                    one.put(subject.name(), one.get(subject.name()) + subject.score());
+                }
+                if (!one.containsKey(subject.name())) {
+                    one.put(subject.name(), subject.score());
+                }
+            }
+        }
+        for (String key : one.keySet()) {
+            labels.add(new Label(key, (double) one.get(key)));
+        }
+        labels.sort(Comparator.naturalOrder());
+        return labels.get(labels.size() - 1);
     }
 }
