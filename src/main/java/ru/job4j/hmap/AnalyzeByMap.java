@@ -64,8 +64,7 @@ public class AnalyzeByMap {
         for (String key : one.keySet()) {
             labels.add(new Label(key, (double) one.get(key)));
         }
-        labels.sort(Comparator.naturalOrder());
-        return labels.get(labels.size() - 1);
+        return Collections.max(labels);
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
@@ -73,18 +72,12 @@ public class AnalyzeByMap {
         List<Label> labels = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                if (one.containsKey(subject.name())) {
-                    one.put(subject.name(), one.get(subject.name()) + subject.score());
-                }
-                if (!one.containsKey(subject.name())) {
-                    one.put(subject.name(), subject.score());
-                }
+                one.put(subject.name(), subject.score() + one.getOrDefault(subject.name(), 0));
             }
         }
         for (String key : one.keySet()) {
             labels.add(new Label(key, (double) one.get(key)));
         }
-        labels.sort(Comparator.naturalOrder());
-        return labels.get(labels.size() - 1);
+        return Collections.max(labels);
     }
 }
