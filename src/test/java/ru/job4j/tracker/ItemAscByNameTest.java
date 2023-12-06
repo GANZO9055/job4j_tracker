@@ -22,8 +22,6 @@ class ItemAscByNameTest {
                 new Item(3, "Three"),
                 new Item(2, "Two")
         );
-        for (int i = 0; i < expected.size(); i++) {
-            assertThat(expected.get(i).getName()).isEqualTo(item.get(i).getName());
-        }
+        assertThat(expected).isEqualTo(item);
     }
 }

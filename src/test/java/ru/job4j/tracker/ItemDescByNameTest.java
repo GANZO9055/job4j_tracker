@@ -22,8 +22,6 @@ class ItemDescByNameTest {
                 new Item(1, "One"),
                 new Item(4, "Four")
         );
-        for (int i = 0; i < expected.size(); i++) {
-            assertThat(expected.get(i).getName()).isEqualTo(item.get(i).getName());
-        }
+        assertThat(expected).isEqualTo(item);
     }
 }
