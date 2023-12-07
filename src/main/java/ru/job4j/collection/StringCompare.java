@@ -11,10 +11,10 @@ public class StringCompare implements Comparator<String> {
         int lengthMin = Math.min(left.length(), right.length());
         List<Character> leftOne = new ArrayList<>();
         List<Character> rightOne = new ArrayList<>();
-        for (int i = 0; i < lengthMin; i++) {
+        for (int i = 0; i < left.length(); i++) {
             leftOne.add(left.charAt(i));
         }
-        for (int i = 0; i < lengthMin; i++) {
+        for (int i = 0; i < right.length(); i++) {
             rightOne.add(right.charAt(i));
         }
         for (int i = 0; i < lengthMin; i++) {
