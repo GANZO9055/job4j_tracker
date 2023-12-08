@@ -9,19 +9,13 @@ public class StringCompare implements Comparator<String> {
     @Override
     public int compare(String left, String right) {
         int lengthMin = Math.min(left.length(), right.length());
-        List<Character> leftOne = new ArrayList<>();
-        List<Character> rightOne = new ArrayList<>();
-        for (int i = 0; i < left.length(); i++) {
-            leftOne.add(left.charAt(i));
-        }
-        for (int i = 0; i < right.length(); i++) {
-            rightOne.add(right.charAt(i));
-        }
         for (int i = 0; i < lengthMin; i++) {
-            if (leftOne.get(i) != rightOne.get(i)) {
-                return Character.compare(leftOne.get(i), rightOne.get(i));
+            char leftOne = left.charAt(i);
+            char rightOne = right.charAt(i);
+            if (leftOne != rightOne) {
+                return Character.compare(leftOne, rightOne);
             }
         }
-        return left.length() - right.length();
+        return Integer.compare(left.length(), right.length());
     }
 }
