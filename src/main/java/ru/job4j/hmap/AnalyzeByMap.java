@@ -36,12 +36,7 @@ public class AnalyzeByMap {
         for (Pupil pupil : pupils) {
             count++;
             for (Subject subject : pupil.subjects()) {
-                if (one.containsKey(subject.name())) {
-                    one.put(subject.name(), one.get(subject.name()) + subject.score());
-                }
-                if (!one.containsKey(subject.name())) {
-                    one.put(subject.name(), subject.score());
-                }
+                one.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
         for (String key : one.keySet()) {
@@ -53,13 +48,10 @@ public class AnalyzeByMap {
     public static Label bestStudent(List<Pupil> pupils) {
         Map<String, Integer> one = new LinkedHashMap<>();
         List<Label> labels = new ArrayList<>();
-        int number = 0;
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                number += subject.score();
+                one.merge(pupil.name(), subject.score(), Integer::sum);
             }
-            one.put(pupil.name(), number);
-            number = 0;
         }
         for (String key : one.keySet()) {
             labels.add(new Label(key, (double) one.get(key)));
