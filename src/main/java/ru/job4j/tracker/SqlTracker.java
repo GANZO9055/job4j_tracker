@@ -45,10 +45,10 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        init();
         try (PreparedStatement statement =
                      connection.prepareStatement(
-                             "INSERT INTO items (name, created) VALUES (?, ?)")) {
+                             "INSERT INTO items (name, created) VALUES (?, ?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.executeUpdate();
@@ -92,10 +92,7 @@ public class SqlTracker implements Store {
                      connection.prepareStatement("SELECT * FROM items")) {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                items.add(new Item(result.getInt("id"),
-                                  result.getString("name"),
-                                  result.getTimestamp("created").toLocalDateTime()
-                ));
+                items.add(createItem(result));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -111,10 +108,7 @@ public class SqlTracker implements Store {
             statement.setString(1, key);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                items.add(new Item(result.getInt("id"),
-                        result.getString("name"),
-                        result.getTimestamp("created").toLocalDateTime()
-                ));
+                items.add(createItem(result));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -130,14 +124,21 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                item = new Item(result.getInt("id"),
-                        result.getString("name"),
-                        result.getTimestamp("created").toLocalDateTime()
-                );
+                item = createItem(result);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return item;
+    }
+
+    private Item createItem(ResultSet resultSet) {
+        try {
+            return new Item(resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getTimestamp("created").toLocalDateTime());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
