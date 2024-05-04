@@ -1,9 +1,6 @@
 package ru.job4j.tracker.action;
 
-import ru.job4j.tracker.Input;
-import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Output;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.*;
 
 import java.util.List;
 
@@ -20,9 +17,9 @@ public class FindAll implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         out.println("=== Вывод всех заявок ===");
-        List<Item> items = tracker.findAll();
+        List<Item> items = memTracker.findAll();
         if (!items.isEmpty()) {
             for (Item item : items) {
                 out.println(item);
