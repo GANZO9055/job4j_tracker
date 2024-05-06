@@ -85,4 +85,21 @@ public class SqlTrackerTest {
         list.add(itemTwo);
         assertThat(tracker.findByName(itemOne.getName())).isEqualTo(list);
     }
+
+    @Test
+    public void checkDeleteAndFindAll() {
+        SqlTracker tracker = new SqlTracker(connection);
+        List<Item> list = new ArrayList<>();
+        Item itemOne = new Item("item1");
+        Item itemTwo = new Item("item2");
+        Item itemThree = new Item("item3");
+        Item testOne = tracker.add(itemOne);
+        tracker.add(itemTwo);
+        Item testThree = tracker.add(itemThree);
+        list.add(testOne);
+        list.add(testThree);
+        tracker.delete(itemTwo.getId());
+        System.out.println(tracker.findAll());
+        assertThat(tracker.findAll()).isEqualTo(list);
+    }
 }
