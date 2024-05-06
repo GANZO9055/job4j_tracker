@@ -52,6 +52,10 @@ public class SqlTracker implements Store {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                item.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
