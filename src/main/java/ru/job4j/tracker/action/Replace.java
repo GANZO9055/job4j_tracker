@@ -16,7 +16,7 @@ public class Replace implements UserAction {
 
     @Override
     public boolean execute(Input input, Store memTracker) {
-        out.println("=== Edit item ===");
+        out.println("=== Редактирование заявки ===");
         int id = input.askInt("Введите id: ");
         String name = input.askStr("Введите name: ");
         Item item = new Item(name);
