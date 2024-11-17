@@ -13,6 +13,8 @@ public interface Store extends AutoCloseable {
 
     void delete(int id);
 
+    void deleteAll();
+
     List<Item> findAll();
 
     List<Item> findByName(String key);

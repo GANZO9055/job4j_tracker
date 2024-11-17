@@ -71,8 +71,10 @@ public class SqlTrackerTest {
     public void checkDelete() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
+        Item item2 = new Item("item2");
         tracker.add(item);
-        tracker.delete(item.getId());
+        tracker.add(item2);
+        tracker.deleteAll();
         assertThat(tracker.findAll()).isEmpty();
     }
 

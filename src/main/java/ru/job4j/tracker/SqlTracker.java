@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import ru.job4j.tracker.Item;
-
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -83,6 +81,16 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      connection.prepareStatement("DELETE FROM items WHERE id = ?")) {
             statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteAll() {
+        try (PreparedStatement statement =
+                     connection.prepareStatement("DELETE FROM items")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
