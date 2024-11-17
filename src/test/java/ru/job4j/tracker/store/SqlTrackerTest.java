@@ -69,7 +69,6 @@ public class SqlTrackerTest {
 
     @Test
     public void checkDelete() {
-        
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
